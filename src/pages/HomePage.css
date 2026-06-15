@@ -1,0 +1,27 @@
+.home-page {
+  flex: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 12px 20px 60px;
+}
+
+.home-page__jars {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding: 24px 0 36px;
+  flex-wrap: wrap;
+}
+
+.home-page__feed-title {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.home-page__state {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--ink-soft);
+}

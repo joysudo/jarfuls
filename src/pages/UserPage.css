@@ -1,0 +1,61 @@
+.user-page {
+  flex: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 12px 20px 60px;
+}
+
+.user-page__header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.user-page__info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.user-page__name {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-page__hours {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+.user-page__quest {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  background: var(--accent-soft, var(--paper-deep));
+  border: 2px solid var(--accent-color, var(--line));
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  line-height: 1.4;
+}
+
+.user-page__quest-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-color, var(--ink-soft));
+  display: block;
+  margin-bottom: 2px;
+}
+
+.user-page__state {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--ink-soft);
+}
