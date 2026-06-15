@@ -46,7 +46,7 @@ export default function HomePage() {
       {error && <p className="home-page__state">{error}</p>}
 
       {!loading && feedGroups.length === 0 && (
-        <p className="home-page__state">Nothing logged yet — the jars are waiting to fill up!</p>
+        <p className="home-page__state">Nothing logged yet.</p>
       )}
 
       {!loading &&

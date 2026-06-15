@@ -16,7 +16,7 @@ export default function ProjectsList({ projects }: ProjectsListProps) {
   return (
     <div className="projects-list">
       <h3 className="projects-list__title">Projects</h3>
-      {visible.length === 0 && <span className="projects-list__empty">No projects yet — they'll show up here once you start one.</span>}
+      {visible.length === 0 && <span className="projects-list__empty">No projects yet. Add them while logging time spent.</span>}
       {visible.map((project) => {
         const activity = getActivityById(project.activityId);
         return (
