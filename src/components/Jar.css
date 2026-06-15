@@ -19,6 +19,10 @@
 
 .jar__label {
   text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .jar__name {

@@ -2,7 +2,8 @@
 
 :root {
   /* Palette */
-  --paper: #FBF3E7;
+  /* --paper: #FBF3E7; */
+  --paper: snow;
   --paper-deep: #F3E6D4;
   --ink: #2B2622;
   --ink-soft: #7A7066;

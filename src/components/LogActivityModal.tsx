@@ -161,13 +161,13 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
                       setActionProject(project);
                     }}
                   >
-                    ✕
+                    🗑️
                   </button>
                 </div>
               ))}
               {activityProjects.length === 0 && (
                 <span style={{ fontSize: '0.85rem', color: 'var(--ink-soft)' }}>
-                  No projects yet — add one below.
+                  No projects in this category yet.
                 </span>
               )}
             </div>
@@ -195,24 +195,26 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
             />
             <span className="modal__checkbox-label">
               Did you finish the project in this session?
-              <span className="modal__checkbox-hint">Marks the project as complete — no extra points.</span>
+              <span className="modal__checkbox-hint">Marks the project as complete at the top of your profile.</span>
             </span>
           </label>
         )}
 
-        <label className="modal__checkbox-row">
-          <input
-            type="checkbox"
-            checked={countsForMainQuest}
-            onChange={(e) => setCountsForMainQuest(e.target.checked)}
-          />
-          <span className="modal__checkbox-label">
-            Counts toward main quest?
-            <span className="modal__checkbox-hint">
-              Multiplies points earned by {MAIN_QUEST_MULTIPLIER}x{activity.points < 0 ? ' (negative points too)' : ''}.
+        {(activity.points >= 0) &&
+          <label className="modal__checkbox-row">
+            <input
+              type="checkbox"
+              checked={countsForMainQuest}
+              onChange={(e) => setCountsForMainQuest(e.target.checked)}
+            />
+            <span className="modal__checkbox-label">
+              Did this activity help you make progress in your main quest?
+              <span className="modal__checkbox-hint">
+                Multiplies points earned by {MAIN_QUEST_MULTIPLIER}x{activity.points < 0 ? ' (negative points too)' : ''}.
+              </span>
             </span>
-          </span>
-        </label>
+          </label>
+        }
 
         <div className="modal__field">
           <label className="modal__label" htmlFor="notes-input">
