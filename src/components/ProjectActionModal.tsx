@@ -48,7 +48,9 @@ export default function ProjectActionModal({ project, onClose, onDelete, onRenam
   return (
     <ModalShell title={`Delete "${project.name}"?`} onClose={onClose} small>
       <p style={{ fontSize: '0.9rem', color: 'var(--ink-soft)', marginTop: 0 }}>
-        Past logs are unaffected. This project will no longer appear as an option for new logs.
+        You won't see this show up at the top of your profile anymore, and it won't show up as an option for new logs.
+        
+        If you simply  finished this project, select it and "mark as done" instead.
       </p>
       <div className="modal__actions" style={{ justifyContent: 'space-between' }}>
         <button type="button" className="modal__btn modal__btn--secondary" onClick={() => setRenaming(true)}>

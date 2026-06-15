@@ -63,6 +63,9 @@ export default function UserPage() {
                 {Math.round(questPoints)} pts toward quest
               </div>
             </div>
+            {!loading && 
+              <ProjectsList projects={userProjects} />
+            }
           </div>
         </div>
 
@@ -71,7 +74,6 @@ export default function UserPage() {
 
         {!loading && (
           <>
-            <ProjectsList projects={userProjects} />
 
             <ActivityGrid
               title="Time-based"
