@@ -35,12 +35,12 @@ export const timeBasedActivities: Activity[] = [
     emoji: '💪',
   },
   {
-    id: 'wake-tech',
-    name: 'Wake Tech',
+    id: 'research-write',
+    name: 'Research/Write',
     type: 'per_hour',
     points: 2,
     requiresProject: false,
-    emoji: '🏫',
+    emoji: '🔍',
   },
   {
     id: 'meeting',
@@ -65,5 +65,13 @@ export const timeBasedActivities: Activity[] = [
     points: 2,
     requiresProject: false,
     emoji: '✍️',
+  },
+  {
+    id: 'video-edit',
+    name: 'Video edit',
+    type: 'per_hour',
+    points: 2,
+    requiresProject: true,
+    emoji: '🎬',
   }
 ];
