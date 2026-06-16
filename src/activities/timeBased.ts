@@ -47,7 +47,7 @@ export const timeBasedActivities: Activity[] = [
     name: 'Meeting',
     type: 'per_hour',
     points: 2,
-    requiresProject: false,
+    requiresProject: true,
     emoji: '🤝',
   },
   {
@@ -55,7 +55,7 @@ export const timeBasedActivities: Activity[] = [
     name: 'Volunteer',
     type: 'per_hour',
     points: 2,
-    requiresProject: false,
+    requiresProject: true,
     emoji: '🫶',
   },
   {

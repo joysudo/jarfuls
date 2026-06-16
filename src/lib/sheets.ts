@@ -144,7 +144,7 @@ export async function appendLogEntry(entry: LogEntry): Promise<void> {
 // Projects
 // ---------------------------------------------------------------------
 
-const PROJECT_COLUMNS = ['id', 'name', 'user', 'activityId', 'status', 'hoursLogged', 'createdAt'] as const;
+const PROJECT_COLUMNS = ['id', 'name', 'user', 'activityIds', 'status', 'hoursLogged', 'createdAt'] as const;
 
 function rowToProject(row: string[]): Project | null {
   if (row.length === 0 || !row[0]) return null;
@@ -160,16 +160,30 @@ function rowToProject(row: string[]): Project | null {
       : null;
   if (!user || !status) return null;
 
+  const activityIds = record.activityIds ? record.activityIds.split(',').filter(Boolean) : [];
+  
   return {
     id: record.id,
     name: record.name,
     user,
-    activityId: record.activityId,
+    activityIds,
     status,
     hoursLogged: record.hoursLogged ? Number(record.hoursLogged) : 0,
     createdAt: record.createdAt,
   };
 }
+
+// function projectToRow(project: Project): string[] {
+//   return [
+//     project.id,
+//     project.name,
+//     project.user,
+//     project.activityIds.join(','),  // Convert array to comma-separated string
+//     project.status,
+//     String(project.hoursLogged),
+//     project.createdAt,
+//   ];
+// }
 
 export async function fetchProjects(): Promise<Project[]> {
   try {
@@ -187,7 +201,20 @@ export async function appendProject(project: Project): Promise<void> {
     id: project.id,
     name: project.name,
     user: project.user,
-    activityId: project.activityId,
+    activityIds: project.activityIds,
+    status: project.status,
+    hoursLogged: project.hoursLogged,
+    createdAt: project.createdAt,
+  });
+}
+
+export async function updateProject(project: Project): Promise<void> {
+  await writeToSheet({
+    type: 'project_update',
+    id: project.id,
+    name: project.name,
+    user: project.user,
+    activityIds: project.activityIds,
     status: project.status,
     hoursLogged: project.hoursLogged,
     createdAt: project.createdAt,

@@ -249,3 +249,7 @@
 .modal__points-preview--negative {
   color: var(--cherry);
 }
+
+.merge-modal__button-group, .merge-modal__rename-section {
+  margin-top: 4px;
+}

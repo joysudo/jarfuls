@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react';
 import ModalShell from './ModalShell';
 import ProjectActionModal from './ProjectActionModal';
+import MergeProjectModal from './MergeProjectModal';
 import type { Activity } from '../types/activities';
 import type { Project } from '../types/projects';
 import type { LogEntry } from '../types/logEntry';
+import { updateProject as updateProjectInSheet } from '../lib/sheets';
 import { calculatePoints, MAIN_QUEST_MULTIPLIER } from '../lib/points';
 import { useAppData } from '../lib/AppDataContext';
 
@@ -28,11 +30,16 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
   const [notes, setNotes] = useState('');
   const [actionProject, setActionProject] = useState<Project | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  // these are just for merge modal
+  const [showMergeModal, setShowMergeModal] = useState(false);
+  const [matchingProject, setMatchingProject] = useState<Project | null>(null);
+  const [pendingActivityId, setPendingActivityId] = useState<string>('');
+  const [projectError, setProjectError] = useState('');
 
   const activityProjects = useMemo(
     () =>
       projects.filter(
-        (p) => p.user === user && p.activityId === activity.id && p.status === 'active'
+        (p) => p.user === user && p.activityIds.includes(activity.id) && p.status === 'active'
       ),
     [projects, user, activity.id]
   );
@@ -55,11 +62,27 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
   const handleAddProject = () => {
     const name = newProjectName.trim();
     if (!name) return;
+    const existingProject = projects.find(
+      (p) => p.name.toLowerCase() === name.toLowerCase() && p.user === user
+    );
+    // break if existing project
+    if (existingProject) {
+      if (existingProject.activityIds.includes(activity.id)) {
+        setProjectError(`"${name}" is already a project. Select it from the list above instead.`);
+        return;
+      } else {
+        setProjectError('');
+        setMatchingProject(existingProject);
+        setPendingActivityId(activity.id);
+        setShowMergeModal(true);
+        return;
+      }
+    }
     const project: Project = {
       id: `proj_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
       name,
       user,
-      activityId: activity.id,
+      activityIds: [activity.id],
       status: 'active',
       hoursLogged: 0,
       createdAt: new Date().toISOString(),
@@ -67,6 +90,30 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
     addProject(project);
     setSelectedProjectIds((prev) => [...prev, project.id]);
     setNewProjectName('');
+  };
+
+  const handleMergeConfirm = async (updatedProject: Project) => {
+    // await updateProject(updatedProject.id, {
+    //   activityIds: updatedProject.activityIds,
+    //   name: updatedProject.name,
+    // });
+    console.log('Before update - projects:', projects.map(p => ({ id: p.id, name: p.name, activityIds: p.activityIds })));
+    console.log('Updating project:', updatedProject);
+    try {
+      await updateProjectInSheet(updatedProject);
+      console.log('Sheet update complete. the value is changed in Google Sheets, but lets see if it is updated here');
+      updateProject(updatedProject.id, {
+        activityIds: updatedProject.activityIds,
+        name: updatedProject.name,
+      });
+      console.log('Local state update called', projects.map(p => ({ id: p.id, name: p.name, activityIds: p.activityIds })));
+      setSelectedProjectIds((prev) => [...prev, updatedProject.id]);
+      setShowMergeModal(false);
+      setMatchingProject(null);
+      setNewProjectName(''); ;
+    } catch (error) {
+      console.error('Failed to merge project:', error);
+    }
   };
 
   const handleDeleteProject = (project: Project) => {
@@ -183,6 +230,11 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
                 Add
               </button>
             </div>
+            {projectError && (
+              <div className="project-error" style={{ color: 'var(--cherry)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                ⚠️ {projectError}
+              </div>
+            )}
           </div>
         )}
 
@@ -255,6 +307,19 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
           onClose={() => setActionProject(null)}
           onDelete={() => handleDeleteProject(actionProject)}
           onRename={(newName) => handleRenameProject(actionProject, newName)}
+        />
+      )}
+
+      {showMergeModal && matchingProject && (
+        <MergeProjectModal
+          project={matchingProject}
+          newActivityId={pendingActivityId}
+          onConfirm={handleMergeConfirm}
+          onCancel={() => {
+            setShowMergeModal(false);
+            setMatchingProject(null);
+            setNewProjectName(''); // clear the input
+          }}
         />
       )}
     </>
