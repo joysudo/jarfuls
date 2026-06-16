@@ -89,5 +89,13 @@ export const fixedDetractorActivities: Activity[] = [
     points: -5,
     requiresProject: false,
     emoji: '📉',
+  },
+  {
+    id: 'doomscroll',
+    name: 'Doomscroll 30+ min',
+    type: 'fixed',
+    points: -2,
+    requiresProject: false,
+    emoji: '📱',
   }
 ];
