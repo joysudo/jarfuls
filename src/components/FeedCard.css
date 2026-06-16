@@ -110,3 +110,23 @@
   text-align: center;
   padding: 24px 0;
 }
+
+.feed-card__projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  /* margin-top: 4px; */
+}
+
+.feed-card__project-tag {
+  font-family: var(--font-body, inherit);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--ink-soft); 
+  background-color: var(--paper-deep);
+  padding: 2px 4px;
+  border-radius: 9999px; 
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}

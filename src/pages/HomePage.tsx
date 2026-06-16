@@ -12,6 +12,7 @@ export default function HomePage() {
   const { logEntries, loading, error } = useAppData();
 
   const feedGroups = useMemo(() => groupEntriesForFeed(logEntries), [logEntries]);
+  const { projects } = useAppData();
 
   return (
     <div className="home-page">
@@ -58,6 +59,7 @@ export default function HomePage() {
                 <FeedCard
                   key={entry.id}
                   entry={entry}
+                  projects={projects}
                   showDate={group.bucket !== 'today' && group.bucket !== 'yesterday'}
                 />
               ))}

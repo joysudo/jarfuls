@@ -2,15 +2,17 @@ import type { LogEntry } from '../types/logEntry';
 import { getActivityById } from '../activities';
 import { getUserById } from '../data/users';
 import { formatEntryDate, formatEntryTime } from '../lib/feed';
+import type { Project } from '../types/projects';
 import './FeedCard.css';
 
 interface FeedCardProps {
   entry: LogEntry;
+  projects: Project[];
   /** show the calendar date (used for "this week" and later buckets) */
   showDate?: boolean;
 }
 
-export default function FeedCard({ entry, showDate }: FeedCardProps) {
+export default function FeedCard({ entry, showDate, projects }: FeedCardProps) {
   const activity = getActivityById(entry.activityId);
   const user = getUserById(entry.user);
   if (!activity || !user) return null;
@@ -31,6 +33,11 @@ export default function FeedCard({ entry, showDate }: FeedCardProps) {
           <span className="feed-card__date">
             {showDate ? formatEntryDate(entry.timestamp) : formatEntryTime(entry.timestamp)}
           </span>
+        </div>
+        <div className="feed-card__projects">
+          {entry.projectIds?.map((projectId, i) => (
+            <span className="feed-card__project-tag" key={i}>{projects.find(p => p.id === projectId)?.name}</span>
+          ))}
         </div>
         {detailParts.length > 0 && (
           <div className="feed-card__detail">{detailParts.join(' · ')}</div>
