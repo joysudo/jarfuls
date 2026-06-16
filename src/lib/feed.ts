@@ -116,5 +116,5 @@ export function formatEntryDate(timestamp: string): string {
 
 export function formatEntryTime(timestamp: string): string {
   const date = new Date(timestamp);
-  return date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  return date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' });
 }
