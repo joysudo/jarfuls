@@ -40,12 +40,12 @@ export default function ProjectsList({ projects }: ProjectsListProps) {
           className={`project-chip ${project.status === 'completed' ? 'project-chip--completed' : ''}`}
         > 
           <div>
+            <span className="project-chip__name">{project.name} </span>
             <span className="project-chip__emojis" aria-hidden="true">
               {getProjectEmojis(project)}
             </span>
-            <span className="project-chip__name">{project.name}</span>
           </div>
-          <p style={{ fontSize: '0.75rem', color: 'var(--paper-deep)' }}>{hours} hours</p>
+          <p style={{ fontSize: '0.7rem', color: 'var(--ink-soft)', fontStyle: 'normal' }}>&nbsp;{hours} hours</p>
         </div>
       );
     })}

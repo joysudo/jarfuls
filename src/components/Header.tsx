@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="header">
       <Link to="/" className="header__logo">
-        <span aria-hidden="true">🫙</span>
+        {/* <span aria-hidden="true">🫙</span> */}
         <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>Jarfuls</span>
       </Link>
       <nav className="header__nav" aria-label="Main">

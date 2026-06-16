@@ -4,27 +4,29 @@
   background: #fff;
   border: 2px solid var(--line);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  /* box-shadow: var(--shadow-card); */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.1s ease-out, border-color 0.1s ease-out, box-shadow 0.1s ease-out;
+  box-shadow: 0 0 0 var(--accent-color, var(--sage));
   font-family: var(--font-body);
   text-align: center;
   gap: 4px;
 }
 
 .activity-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scaleX(0.99) scaleY(1.01);
   border-color: var(--accent-color, var(--sage));
+  box-shadow: 0 3px 0 var(--accent-color, var(--sage));
 }
 
 .activity-card:active {
-  transform: translateY(0px);
-  /* box-shadow: 0 0 0 var(--line), 0 2px 8px -4px rgba(43, 38, 34, 0.3); */
+  transform: translateY(1px) scaleX(1.01) scaleY(0.99);
+  box-shadow: 0 1px 0 var(--accent-color, var(--sage));
 }
 
 .activity-card__corner {

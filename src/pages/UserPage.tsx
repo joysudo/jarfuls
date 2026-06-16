@@ -59,7 +59,7 @@ export default function UserPage() {
             <div className="user-page__quest">
               <span className="user-page__quest-label">Main quest</span>
               {user.mainQuest}
-              <div style={{ marginTop: 6, fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
+              <div style={{ marginTop: 0, fontFamily: 'var(--font-mono)', color: 'var(--ink-soft)', fontSize: '0.8rem' }}>
                 {Math.round(questPoints)} pts toward quest
               </div>
             </div>
