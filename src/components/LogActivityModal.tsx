@@ -234,18 +234,18 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
                   No projects in this category yet.
                 </span>
               )}
-            </div>
-            <div className="modal__add-project">
-              <input
-                className="modal__input"
-                placeholder="Add your own project..."
-                value={newProjectName}
-                onChange={(e) => setNewProjectName(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAddProject(); } }}
-              />
-              <button type="button" className="modal__btn modal__btn" onClick={handleAddProject}>
-                Add
-              </button>
+              <div className="modal__add-project chip">
+                <input
+                  className="modal__input"
+                  placeholder="Add your own project..."
+                  value={newProjectName}
+                  onChange={(e) => setNewProjectName(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAddProject(); } }}
+                />
+                <button type="button" className="modal__btn" onClick={handleAddProject}>
+                  Add
+                </button>
+              </div>
             </div>
             {projectError && (
               <div className="project-error" style={{ color: 'var(--cherry)', fontSize: '0.875rem', marginTop: '0.25rem' }}>

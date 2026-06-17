@@ -185,12 +185,30 @@
 }
 
 .modal__add-project {
-  display: flex;
+  display: inline-flex;
   gap: 8px;
 }
 
 .modal__add-project .modal__input {
   flex: 1;
+  font-size: 0.85rem;
+  padding: 0;
+  outline: none;
+  border: none;
+  border-radius: 0;
+}
+
+.modal__add-project .modal__btn {
+  /* flex: 1; */
+  font-size: 0.85rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+}
+
+.modal__add-project .chip .modal__input:focus {
+  flex: 1;
+  font-size: 0.85rem;
+  outline-color: red;
 }
 
 .modal__btn {
