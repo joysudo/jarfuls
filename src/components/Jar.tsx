@@ -114,7 +114,7 @@ export default function Jar({
           <span aria-hidden="true">{emoji}</span> {name}
         </div>
         <div className="jar__stat">
-          {Math.round(mainQuestPoints)} pts toward quest · {hours.toFixed(1)} hrs logged
+          {Math.round(mainQuestPoints)} quest pts  · {hours.toFixed(1)} hrs logged
         </div>
         <div className="jar__quest">{mainQuest}</div>
       </div>

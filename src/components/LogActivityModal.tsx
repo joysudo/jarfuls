@@ -26,9 +26,8 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
   const [selectedProjectIds, setSelectedProjectIds] = useState<string[]>([]);
   const [newProjectName, setNewProjectName] = useState('');
   const [completedAt, setCompletedAt] = useState(() => {
-    // only do this when component first mounts
-    // is it supposed to recreate on every render? check
-    return new Date().toISOString().slice(0, 16);
+    const localDate = new Date;
+    return new Date(localDate.getTime() - localDate.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
   });
   const [completedProject, setCompletedProject] = useState(false);
   const [countsForMainQuest, setCountsForMainQuest] = useState(false);
