@@ -11,7 +11,7 @@
   justify-content: center;
   padding: 10px;
   cursor: pointer;
-  transition: transform 0.1s ease-out, border-color 0.1s ease-out, box-shadow 0.1s ease-out;
+  transition: transform 0.1s ease-out, border-color 0.15s ease-out, box-shadow 0.1s ease-out;
   box-shadow: 0 0 0 var(--accent-color, var(--sage));
   font-family: var(--font-body);
   text-align: center;
