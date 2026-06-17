@@ -148,7 +148,7 @@ export const fixedRewardActivities: Activity[] = [
   },
   {
     id: 'do-full-beat',
-    name: 'Do full beat',
+    name: 'Full beat',
     type: 'fixed',
     points: 2,
     requiresProject: false,

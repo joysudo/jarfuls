@@ -89,7 +89,8 @@ button {
 /* Focus visibility */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible,
+input:focus-visible, 
+textarea:focus-visible,
 [tabindex]:focus-visible {
   outline: 3px solid var(--sage);
   outline-offset: 2px;

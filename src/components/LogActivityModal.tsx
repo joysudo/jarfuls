@@ -25,6 +25,11 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
   const [hours, setHours] = useState('');
   const [selectedProjectIds, setSelectedProjectIds] = useState<string[]>([]);
   const [newProjectName, setNewProjectName] = useState('');
+  const [completedAt, setCompletedAt] = useState(() => {
+    // only do this when component first mounts
+    // is it supposed to recreate on every render? check
+    return new Date().toISOString().slice(0, 16);
+  });
   const [completedProject, setCompletedProject] = useState(false);
   const [countsForMainQuest, setCountsForMainQuest] = useState(false);
   const [notes, setNotes] = useState('');
@@ -128,12 +133,13 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
   const canSubmit = activity.type === 'fixed' || hoursNum > 0;
 
   const handleSubmit = async () => {
+    if (submitting) return;
     setSubmitting(true);
     const entry: LogEntry = {
       id: makeId(),
       user,
       activityId: activity.id,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date(completedAt).toISOString(),
       hours: activity.type === 'per_hour' ? hoursNum : undefined,
       pointsEarned: previewPoints,
       countsForMainQuest,
@@ -184,6 +190,17 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
           </div>
         )}
 
+        <div className="modal__field">
+          <label className="modal__label" htmlFor="completed-at">Date completed</label>
+          <input
+            id="completed-at"
+            type="datetime-local"
+            className="modal__input"
+            value={completedAt}
+            onChange={(e) => setCompletedAt(e.target.value)}
+          />
+        </div>
+
         {activity.type === 'per_hour' && activity.requiresProject && (
           <div className="modal__field">
             <label className="modal__label">Projects</label>
@@ -226,7 +243,7 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
                 onChange={(e) => setNewProjectName(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAddProject(); } }}
               />
-              <button type="button" className="modal__btn modal__btn--secondary" onClick={handleAddProject}>
+              <button type="button" className="modal__btn modal__btn" onClick={handleAddProject}>
                 Add
               </button>
             </div>
@@ -270,14 +287,14 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
 
         <div className="modal__field">
           <label className="modal__label" htmlFor="notes-input">
-            {activity.type === 'fixed' ? 'Notes' : 'What did you do?'}
+            {activity.type === 'fixed' ? 'Notes' : 'What did you work on?'}
           </label>
           <textarea
             id="notes-input"
             className="modal__textarea"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder={activity.type === 'fixed' ? 'Optional notes...' : 'e.g. read 2 chapters of...'}
+            placeholder={activity.type === 'fixed' ? 'Notes...' : 'e.g. read 2 chapters of...'}
           />
         </div>
 
