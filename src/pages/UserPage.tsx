@@ -11,6 +11,7 @@ import { timeBasedActivities, fixedRewardActivities, fixedDetractorActivities } 
 import { totalHours, totalPoints, mainQuestPoints, jarFillPercent } from '../lib/points';
 import type { Activity } from '../types/activities';
 import './UserPage.css';
+import MDEditor from '@uiw/react-md-editor';
 
 export default function UserPage() {
   const { suffix } = useParams<{ suffix: string }>();
@@ -41,13 +42,11 @@ export default function UserPage() {
     const saved = localStorage.getItem('todo');
     if (saved) setTodo(saved);
   }, []);
-  const handleTodoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    setTodo(value);
-    localStorage.setItem('todo', value);
-    e.target.style.height = "";e.target.style.height = e.target.scrollHeight + 3 + "px";
-
-  }
+  const handleTodoChange = (value?: string) => {
+    const newValue = value || '';
+    setTodo(newValue);
+    localStorage.setItem('userNotes', newValue);
+  };
 
   const points = totalPoints(userEntries, user.id);
   const hours = totalHours(userEntries, user.id);
@@ -117,10 +116,13 @@ export default function UserPage() {
         <h3 className="activity-section__title">Notes</h3>
         <div className="user-page__quest">
           <span className="user-page__quest-label">To-do</span>
-          <textarea 
+          {/* <textarea  */}
+          <MDEditor
             value={todo} 
             onChange={handleTodoChange} 
-            placeholder="You can type notes or enter your to-do list here. Data is saved to your local browser."
+            preview="edit" // comment this out if using textarea instead of mdeditor
+            // placeholder="You can type notes or enter your to-do list here. Data is saved to your local browser."
+            className="todo-editor"
           />
         </div>
 

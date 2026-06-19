@@ -91,3 +91,24 @@
   background: var(--line);
   border-radius: 2px;
 }
+
+.todo-editor {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.todo-editor * {
+  font-family: 'Fredoka', sans-serif !important;
+}
+
+.todo-editor .w-md-editor-text,
+.todo-editor .w-md-editor-text-pre,
+.todo-editor .w-md-editor-text-input,
+.todo-editor .w-md-editor-text-pre > code,
+.todo-editor .w-md-editor-text-pre > code * {
+  font-family: 'Fredoka', sans-serif !important;
+}
+
+.todo-editor .w-md-editor-preview * {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
