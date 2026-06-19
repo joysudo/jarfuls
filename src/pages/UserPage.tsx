@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { getUserByUrlSuffix } from '../data/users';
 import { useAppData } from '../lib/AppDataContext';
@@ -34,6 +34,19 @@ export default function UserPage() {
         <p className="user-page__state">No jar found for "{suffix}".</p>
       </div>
     );
+  }
+
+  const [todo, setTodo] = useState('');
+  useEffect(() => {
+    const saved = localStorage.getItem('todo');
+    if (saved) setTodo(saved);
+  }, []);
+  const handleTodoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    setTodo(value);
+    localStorage.setItem('todo', value);
+    e.target.style.height = "";e.target.style.height = e.target.scrollHeight + 3 + "px";
+
   }
 
   const points = totalPoints(userEntries, user.id);
@@ -100,6 +113,16 @@ export default function UserPage() {
             />
           </>
         )}
+
+        <h3 className="activity-section__title">Notes</h3>
+        <div className="user-page__quest">
+          <span className="user-page__quest-label">To-do</span>
+          <textarea 
+            value={todo} 
+            onChange={handleTodoChange} 
+            placeholder="You can type notes or enter your to-do list here. Data is saved to your local browser."
+          />
+        </div>
 
         {activeActivity && (
           <LogActivityModal
