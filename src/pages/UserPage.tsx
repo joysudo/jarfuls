@@ -45,7 +45,7 @@ export default function UserPage() {
   const handleTodoChange = (value?: string) => {
     const newValue = value || '';
     setTodo(newValue);
-    localStorage.setItem('userNotes', newValue);
+    localStorage.setItem('todo', newValue);
   };
 
   const points = totalPoints(userEntries, user.id);

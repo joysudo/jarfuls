@@ -149,7 +149,7 @@ export const fixedDetractorActivities: Activity[] = [
   {
     id: 'sibling-fight',
     name: 'Sibling fight',
-    type: 'per_hour',
+    type: 'fixed',
     points: -2,
     requiresProject: true,
     emoji: '👭',
