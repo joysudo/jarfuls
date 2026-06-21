@@ -4,6 +4,7 @@ export type FeedBucket =
   | 'today'
   | 'yesterday'
   | 'thisWeek'
+  | 'lastWeek'
   | 'thisMonth'
   | 'thisYear'
   | 'longAgo';
@@ -12,6 +13,7 @@ export const FEED_BUCKET_LABELS: Record<FeedBucket, string> = {
   today: 'Today',
   yesterday: 'Yesterday',
   thisWeek: 'This week',
+  lastWeek: 'Last week',
   thisMonth: 'This month',
   thisYear: 'This year',
   longAgo: 'A long time ago...',
@@ -21,6 +23,7 @@ export const FEED_BUCKET_ORDER: FeedBucket[] = [
   'today',
   'yesterday',
   'thisWeek',
+  'lastWeek',
   'thisMonth',
   'thisYear',
   'longAgo',
@@ -66,6 +69,11 @@ export function bucketForTimestamp(timestamp: string, now: Date = new Date()): F
   if (diffDays === 1) return 'yesterday';
 
   if (entryDay >= startOfWeek(now)) return 'thisWeek';
+
+  const lastWeekStart = startOfWeek(now);
+  lastWeekStart.setDate(lastWeekStart.getDate() - 7);
+  if (entryDay >= lastWeekStart) return 'lastWeek';
+
   if (entryDay >= startOfMonth(now)) return 'thisMonth';
   if (entryDay >= startOfYear(now)) return 'thisYear';
 
