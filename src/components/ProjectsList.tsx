@@ -31,21 +31,22 @@ export default function ProjectsList({ projects }: ProjectsListProps) {
       </span>
     )}
     {visible.map((project) => {
-      const hours = logEntries
-        .filter(e => e.projectIds?.includes(project.id))
-        .reduce((sum, e) => sum + (e.hours || 0), 0);
+      const projectLogs = logEntries.filter(e => e.projectIds?.includes(project.id));
+      const hours = projectLogs.reduce((sum, e) => sum + (e.hours || 0), 0);
+      const dynamicActivityIds = Array.from(
+        new Set(projectLogs.map(e => e.activityId).filter(Boolean))
+      );
+      const projectWithDynamicActivities = { ...project, activityIds: dynamicActivityIds };
+
       return (
-        <div
-          key={project.id}
-          className={`project-chip ${project.status === 'completed' ? 'project-chip--completed' : ''}`}
-        > 
+        <div key={project.id} className={`project-chip ${project.status === 'completed' ? 'project-chip--completed' : ''}`}> 
           <div>
             <span className="project-chip__name">{project.name} </span>
             <span className="project-chip__emojis" aria-hidden="true">
-              {getProjectEmojis(project)}
+              {getProjectEmojis(projectWithDynamicActivities)}
             </span>
           </div>
-          <p style={{ fontSize: '0.7rem', color: 'var(--ink-soft)', fontStyle: 'normal' }}>&nbsp;{hours} hours</p>
+          <p style={{ fontSize: '0.7rem', color: 'var(--ink-soft)' }}>&nbsp;{hours} hours</p>
         </div>
       );
     })}
