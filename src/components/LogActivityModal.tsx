@@ -317,10 +317,10 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
             type="button"
             className="modal__btn"
             disabled={!canSubmit || submitting || projectSubmitting}
-            style={{ opacity: !canSubmit || submitting ? 0.6 : 1 }}
+            style={{ opacity: (!canSubmit || submitting || projectSubmitting) ? 0.6 : 1 }}
             onClick={handleSubmit}
           >
-            {submitting ? 'Saving...' : 'Log it'}
+            {projectSubmitting ? 'Adding project...' : submitting ? 'Saving...' : 'Log it'}
           </button>
         </div>
       </ModalShell>
