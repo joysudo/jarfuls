@@ -80,8 +80,6 @@ async function writeToSheet(payload: any): Promise<void> {
     body: JSON.stringify(payload),
   });
   
-  // With no-cors, we can't read the response
-  // The request will still go through to Google
   console.log('Data sent to Google Sheets:', payload);
 }
 

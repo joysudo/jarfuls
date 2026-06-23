@@ -33,6 +33,7 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
   const [countsForMainQuest, setCountsForMainQuest] = useState(false);
   const [notes, setNotes] = useState('');
   const [actionProject, setActionProject] = useState<Project | null>(null);
+  const [projectSubmitting, setProjectSubmitting] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   // these are just for merge modal
   const [showMergeModal, setShowMergeModal] = useState(false);
@@ -63,7 +64,7 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
     );
   };
 
-  const handleAddProject = () => {
+  const handleAddProject = async () => {
     const name = newProjectName.trim();
     if (!name) return;
     const existingProject = projects.find(
@@ -91,9 +92,16 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
       hoursLogged: 0,
       createdAt: new Date().toISOString(),
     };
-    addProject(project);
-    setSelectedProjectIds((prev) => [...prev, project.id]);
-    setNewProjectName('');
+    try {
+      setProjectSubmitting(true);
+      await addProject(project);
+      setSelectedProjectIds((prev) => [...prev, project.id]);
+      setNewProjectName('');
+    } catch (err) {
+      console.error("faied to add project:", err);
+    } finally {
+      setProjectSubmitting(false);
+    }
   };
 
   const handleMergeConfirm = async (updatedProject: Project) => {
@@ -132,7 +140,7 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
   const canSubmit = activity.type === 'fixed' || hoursNum > 0;
 
   const handleSubmit = async () => {
-    if (submitting) return;
+    if (submitting || projectSubmitting) return;
     setSubmitting(true);
     const entry: LogEntry = {
       id: makeId(),
@@ -308,7 +316,7 @@ export default function LogActivityModal({ activity, user, onClose }: LogActivit
           <button
             type="button"
             className="modal__btn"
-            disabled={!canSubmit || submitting}
+            disabled={!canSubmit || submitting || projectSubmitting}
             style={{ opacity: !canSubmit || submitting ? 0.6 : 1 }}
             onClick={handleSubmit}
           >
