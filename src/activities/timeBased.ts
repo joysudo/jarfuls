@@ -73,5 +73,13 @@ export const timeBasedActivities: Activity[] = [
     points: 2,
     requiresProject: true,
     emoji: '🎬',
+  },
+  {
+    id: 'coursework',
+    name: 'Coursework',
+    type: 'per_hour',
+    points: 2,
+    requiresProject: true,
+    emoji: '📓',
   }
 ];

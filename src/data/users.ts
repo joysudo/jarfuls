@@ -17,7 +17,7 @@ export const USERS: UserConfig[] = [
     color: '#E2A33D',
     colorSoft: '#FBEBCB',
     mainQuest: 'Become a strong independent woman and a computer science nerd. We contain multitudes',
-    pointGoal: 1000,
+    pointGoal: 500,
     emoji: '🥜',
   },
   {
@@ -27,7 +27,7 @@ export const USERS: UserConfig[] = [
     color: '#C4477B',
     colorSoft: '#F7DCE7',
     mainQuest: 'Build a source of passive income that will return at least $5 in the next century',
-    pointGoal: 1000,
+    pointGoal: 500,
     emoji: '🍓',
   },
 ];

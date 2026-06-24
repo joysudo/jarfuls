@@ -25,16 +25,6 @@
   position: relative;
 }
 
-.vbar__fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.4);
-}
-
 .vbar__percent {
   font-family: var(--font-mono);
   font-weight: 700;
