@@ -105,7 +105,7 @@ export default function Jar({
           fill={clamped > 45 ? '#fff' : 'var(--ink)'}
         >
           {/* {Math.round(clamped)}% */}
-          {points}pts
+          {points.toFixed(1)}pts
         </text>
       </svg>
 
