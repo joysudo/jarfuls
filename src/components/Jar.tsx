@@ -63,9 +63,15 @@ export default function Jar({
         /> */}
 
         {/* Liquid fill, clipped to jar interior */}
-        <g clipPath={`url(#${clipId})`}>
+        <g 
+          clipPath={`url(#${clipId})`}
+          className="jar__liquid"
+          // style={{
+          //   transform: `translateY(${liquidY - JAR_BOTTOM}px)`,
+          //   transition: 'transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1)'
+          // }}
+        >
           <rect
-            className="jar__liquid"
             x="20"
             y={liquidY}
             width="140"
@@ -102,7 +108,7 @@ export default function Jar({
           fontFamily="var(--font-display)"
           fontWeight="600"
           fontSize="28"
-          fill={clamped > 45 ? '#fff' : 'var(--ink)'}
+          fill={clamped > 62.5 ? '#fff' : 'var(--ink)'}
         >
           {/* {Math.round(clamped)}% */}
           {points.toFixed(1)}pts

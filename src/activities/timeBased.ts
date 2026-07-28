@@ -67,19 +67,19 @@ export const timeBasedActivities: Activity[] = [
     emoji: '✍️',
   },
   {
-    id: 'video-edit',
-    name: 'Video edit',
-    type: 'per_hour',
-    points: 2,
-    requiresProject: true,
-    emoji: '🎬',
-  },
-  {
     id: 'coursework',
     name: 'Coursework',
     type: 'per_hour',
     points: 2,
     requiresProject: true,
     emoji: '📓',
+  },
+  {
+    id: 'misc',
+    name: 'Miscellaneous',
+    type: 'per_hour',
+    points: 1,
+    requiresProject: true,
+    emoji: '❓',
   }
 ];

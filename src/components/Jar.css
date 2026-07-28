@@ -13,8 +13,22 @@
   display: block;
 }
 
-.jar__liquid {
+/* .jar__liquid {
   transition: y 0.6s cubic-bezier(0.34, 1.2, 0.64, 1), height 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+} */
+
+@keyframes fillUp {
+  from {
+    transform: translateY(160px); 
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.jar__liquid {
+  /* Runs once on mount */
+  animation: fillUp 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
 }
 
 .jar__label {
