@@ -3,6 +3,7 @@ import { USERS } from '../data/users';
 import { useAppData } from '../lib/AppDataContext';
 import Jar from '../components/Jar';
 import FeedCard from '../components/FeedCard';
+import PointsChart from '../components/PointsChart';
 import { totalHours, totalPoints, mainQuestPoints, jarFillPercent } from '../lib/points';
 import { groupEntriesForFeed } from '../lib/feed';
 import './HomePage.css';
@@ -39,8 +40,8 @@ export default function HomePage() {
             />
           );
         })}
+        <PointsChart logEntries={logEntries} height={350} />
       </div>
-
       <h2 className="home-page__feed-title">Activity feed</h2>
 
       {loading && <p className="home-page__state">Loading the feed...</p>}
@@ -65,7 +66,7 @@ export default function HomePage() {
               ))}
             </div>
           </section>
-        ))}
+      ))}
     </div>
   );
 }
